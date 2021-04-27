@@ -4,6 +4,9 @@ services:
     container_name: app
     restart: always
     build: .
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: pwd123
     ports:
       - "3000:3000"
     links:

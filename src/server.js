@@ -1,11 +1,14 @@
 const express = require('express')
 const app = express()
-const users = require('../data/users.json')
+//const users = require('../data/users.json')
 
 const MongoClient = require('mongodb').MongoClient;
 
 // connection Url:
-const url = 'mongodb://mongo:27017';
+const user = process.env.MONGO_INITDB_ROOT_USERNAME
+const pwd = process.env.MONGO_INITDB_ROOT_PASSWORD
+
+const url = `${user}:${pwd}@mongodb://mongo:27017`; 
 
 // def data base to connect with :
 const dbName = 'usersApi';
