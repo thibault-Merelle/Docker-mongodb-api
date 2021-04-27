@@ -5,6 +5,7 @@ WORKDIR /app
 
 COPY . .
 
+RUN npm cache clean
 RUN npm install
 
 EXPOSE 3000
