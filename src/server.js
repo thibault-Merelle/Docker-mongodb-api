@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const port = 3000
 //const users = require('../data/users.json')
 
 const MongoClient = require('mongodb').MongoClient;
@@ -22,6 +23,11 @@ MongoClient.connect(url, function(err, client) {
 
 app.use(express.json())
 
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+  })
+
+
 app.get('/users', async (req,res) => {
     try {
         const docs = await db.collection('users').find({}).toArray()
@@ -43,6 +49,6 @@ app.get('/users/:id', async (req,res) => {
     }
 })
 
-app.listen(3000, () => {
-    console.log("Server listening !")
+app.listen(port, () => {
+    console.log(`Server listening ! on port : ${port}`)
 })
