@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 app.get("/add", (req, res) => {
     MongoClient.connect(url, function (err, res) {
         if (err) throw err;
-        const db = res.db(dbName);
+        //const db = res.db(dbName);
         const myobj = [
             {"id": 1, "username":"insetest", "privileges": "none", "password":"mypasswordtest"},
         ];
@@ -46,7 +46,7 @@ app.get("/add", (req, res) => {
 
 app.get('/users', async (req,res) => {
     try {
-        const db = res.db(dbName);
+        //const db = res.db(dbName);
         const docs = await db.collection('users').find({}).toArray()
         res.status(200).json(docs)
     } catch (err) {
@@ -58,7 +58,7 @@ app.get('/users', async (req,res) => {
 app.get('/users/:id', async (req,res) => {
     const id = parseInt(req.params.id)
     try {
-        const db = res.db(dbName);
+        //const db = res.db(dbName);
         const docs = await db.collection('users').find({id}).toArray()
         res.status(200).json(docs)
     } catch (err) {
