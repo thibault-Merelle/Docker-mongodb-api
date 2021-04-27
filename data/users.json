@@ -1,0 +1,30 @@
+
+[
+   {
+    "id": 1,
+    "username":"titi",
+    "privileges": "admin",
+    "password":"mypassword1"
+    },
+
+   {
+    "id": 2,
+    "username":"baba",
+    "privileges": "contributor",
+    "password":"mypassword2"
+    },
+
+   {
+    "id": 3,
+    "username":"lolo",
+    "privileges": "contributor restrict",
+    "password":"mypassword3"
+    },
+
+   {
+    "id": 4,
+    "username":"tutu",
+    "privileges": "reader",
+    "password":"mypassword4"
+    }
+]
