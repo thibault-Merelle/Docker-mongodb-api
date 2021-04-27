@@ -9,10 +9,10 @@ const MongoClient = require('mongodb').MongoClient;
 const user = process.env.MONGO_INITDB_ROOT_USERNAME
 const pwd = process.env.MONGO_INITDB_ROOT_PASSWORD
 
-const url = `${user}:${pwd}@mongodb://mongo:27017`;
+const url = `${user}:${pwd}@mongodb://mongo:27017/userAPI`;
 
 // def data base to connect with :
-const dbName = 'usersApi';
+//const dbName = 'usersApi';
 
  
 // MongoClient.connect(url, function(err, res) {
@@ -28,15 +28,15 @@ app.get('/', (req, res) => {
   })
 
 app.get("/add", (req, res) => {
-    MongoClient.connect(url, function (err, res) {
+    MongoClient.connect(url, function (err, db) {
         if (err) throw err;
-        const db = res.db(dbName);
+        //const db = res.db(dbName);
         const myobj = [
             {"id": 1, "username":"insetest", "privileges": "none", "password":"mypasswordtest"},
         ];
-        db.collection("users").insertMany(myobj, function (err, res) {
+        db.collection("users").insertMany(myobj, function (err, db) {
             if (err) throw err;
-            console.log("Number of objects inserted: " + res.insertedCount);
+            console.log("Number of objects inserted: " + db.insertedCount);
             db.close();
         });
     });
@@ -44,7 +44,7 @@ app.get("/add", (req, res) => {
 })
 
 
-app.get('/users', async (req,res) => {
+app.get('/users', async (req,db) => {
     try {
         //const db = res.db(dbName);
         const docs = await db.collection('users').find({}).toArray()
@@ -55,7 +55,7 @@ app.get('/users', async (req,res) => {
     }
 })
 
-app.get('/users/:id', async (req,res) => {
+app.get('/users/:id', async (req,db) => {
     const id = parseInt(req.params.id)
     try {
         //const db = res.db(dbName);
