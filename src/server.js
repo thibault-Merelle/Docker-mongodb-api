@@ -9,15 +9,15 @@ const MongoClient = require('mongodb').MongoClient;
 const user = process.env.MONGO_INITDB_ROOT_USERNAME
 const pwd = process.env.MONGO_INITDB_ROOT_PASSWORD
 
-const url = `${user}:${pwd}@mongodb://mongo:27017`; 
+const url = `${user}:${pwd}@mongodb://mongo:27017`;
 
 // def data base to connect with :
 const dbName = 'usersApi';
 
  
-MongoClient.connect(url, function(err, client) {
+MongoClient.connect(url, function(err, res) {
   console.log("Connected successfully to server");
-  const db = client.db(dbName);
+  const db = res.db(dbName);
 });
 
 
@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
 
 app.get('/users', async (req,res) => {
     try {
+        const db = res.db(dbName);
         const docs = await db.collection('users').find({}).toArray()
         res.status(200).json(docs)
     } catch (err) {
@@ -41,6 +42,7 @@ app.get('/users', async (req,res) => {
 app.get('/users/:id', async (req,res) => {
     const id = parseInt(req.params.id)
     try {
+        const db = res.db(dbName);
         const docs = await db.collection('users').find({id}).toArray()
         res.status(200).json(docs)
     } catch (err) {
