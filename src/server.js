@@ -15,10 +15,10 @@ const url = `${user}:${pwd}@mongodb://mongo:27017`;
 const dbName = 'usersApi';
 
  
-MongoClient.connect(url, function(err, res) {
-  console.log("Connected successfully to server");
-  const db = res.db(dbName);
-});
+// MongoClient.connect(url, function(err, res) {
+//   console.log("Connected successfully to server");
+//   const db = res.db(dbName);
+// });
 
 
 app.use(express.json())
@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 app.get("/add", (req, res) => {
     MongoClient.connect(url, function (err, res) {
         if (err) throw err;
-        //const db = res.db(dbName);
+        const db = res.db(dbName);
         const myobj = [
             {"id": 1, "username":"insetest", "privileges": "none", "password":"mypasswordtest"},
         ];
