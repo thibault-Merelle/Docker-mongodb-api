@@ -27,6 +27,23 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
   })
 
+app.get("/add", (req, res) => {
+    MongoClient.connect(url, function (err, res) {
+        if (err) throw err;
+        const db = res.db(dbName);
+        const myobj = [
+            {"id": 1, "username":"insetest", "privileges": "none", "password":"mypasswordtest"},
+        ];
+        db.collection("users").insertMany(myobj, function (err, res) {
+            if (err) throw err;
+            console.log("Number of objects inserted: " + res.insertedCount);
+            db.close();
+        });
+    });
+    res.send("Insertion succeeded");
+})
+
+
 
 app.get('/users', async (req,res) => {
     try {
