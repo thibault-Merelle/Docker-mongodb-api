@@ -44,7 +44,6 @@ app.get("/add", (req, res) => {
 })
 
 
-
 app.get('/users', async (req,res) => {
     try {
         const db = res.db(dbName);
