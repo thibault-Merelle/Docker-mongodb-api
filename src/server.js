@@ -58,8 +58,8 @@ app.get('/users', async (req,db) => {
 app.get("/find", (re, res) => {
     MongoClient.connect(url, function (err, db) {
       if (err) throw err;
-      var dbo = db.db("mydb");
-      dbo
+    //   var dbo = db.db("mydb");
+      db
         .collection("users")
         .find({})
         .toArray(function (err, result) {
