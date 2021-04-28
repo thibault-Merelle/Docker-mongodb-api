@@ -55,6 +55,24 @@ app.get('/users', async (req,db) => {
     }
 })
 
+app.get("/find", (re, res) => {
+    MongoClient.connect(url, function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("mydb");
+      dbo
+        .collection("users")
+        .find({})
+        .toArray(function (err, result) {
+          if (err) throw err;
+          res.send(result);
+          console.log(result);
+          db.close();
+        });
+    });
+})
+
+
+
 app.get('/users/:id', async (req,db) => {
     const id = parseInt(req.params.id)
     try {

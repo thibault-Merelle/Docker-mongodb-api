@@ -1,1 +1,1 @@
-mongoimport --jsonArray --db usersApi --collection users --file users.json
+mongoimport --jsonArray --collection=users --file=users.json --db=usersApi 'mongodb://localhost:27017'
